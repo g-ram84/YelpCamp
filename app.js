@@ -1,6 +1,9 @@
-const express = require("express");
-const path = require("path");
-const mongoose = require("mongoose");
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config()
+}
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const session = require('express-session');
@@ -14,7 +17,7 @@ const userRoutes = require('./routes/users')
 const reviewRoutes = require('./routes/reviews')
 const campgroundRoutes = require('./routes/campgrounds');
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp", {
+mongoose.connect('mongodb://localhost:27017/yelp-camp', {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useUnifiedTopology: true,
@@ -22,16 +25,16 @@ mongoose.connect("mongodb://localhost:27017/yelp-camp", {
 });
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-	console.log("Database Connected");
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+	console.log('Database Connected');
 });
 
 const app = express();
 
 app.engine('ejs', ejsMate)
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -69,8 +72,8 @@ app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
-app.get("/", (req, res) => {
-	res.render("home");
+app.get('/', (req, res) => {
+	res.render('home');
 });
 
 app.all('*', (req, res, next) => {
@@ -79,10 +82,10 @@ app.all('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
 	const { statusCode = 500 } = err;
-	if (!err.message) err.message = "YOU FUCKED UP"
+	if (!err.message) err.message = 'YOU FUCKED UP'
 	res.status(statusCode).render('error', { err })
 })
 
 app.listen(3000, () => {
-	console.log("Serving on port 3000");
+	console.log('Serving on port 3000');
 });
