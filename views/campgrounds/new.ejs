@@ -17,7 +17,7 @@
           Looks Good!
         </div>
       </div>
-      <input type="file" name="image" multiple>
+      <!-- <input type="file" name="image" multiple> -->
       <!-- <div class="mb-3">
         <label class="form-label" for="image">Image URL</label>
         <input class="form-control" type="text" name="campground[image]" id="image" required>
@@ -42,6 +42,10 @@
         <div class="valid-feedback">
           Looks Good!
         </div>
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Choose Images</label>
+        <input name="image" class="form-control" type="file" id="image" multiple required>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">Add Campground</button>
