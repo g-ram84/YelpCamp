@@ -12,7 +12,7 @@
           <form action="/login" method="POST" class="validated-form" novalidate>
             <div class="mb-3">
               <label class="form-label" for="username">Username</label>
-              <input class="form-control" type="text" name="username" id="username" required>
+              <input class="form-control" type="text" name="username" id="username" autofocus required>
               <div class="valid-feedback">
                 Looks Good!
               </div>
@@ -24,7 +24,9 @@
                 Looks Good!
               </div>
             </div>
-            <button class="btn btn-success">Login</button>
+            <div class="d-grid">
+              <button class="btn btn-success">Login</button>
+            </div>
           </form>
         </div>
       </div>
